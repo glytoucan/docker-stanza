@@ -1,0 +1,9 @@
+glytoucanstanza:
+  build: .
+  command: run.sh
+  ports:
+   - "9292:9292"
+  external_links:
+   - docker-virtuoso_bluetree:ts.beta.glytoucan.org
+  name:
+    stanza_bluetree
