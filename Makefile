@@ -8,7 +8,8 @@ runssh:
 	sudo docker.io run --rm -p 9292:9292 -name="stanza_bluetree" aoki/stanza /sbin/my_init --enable-insecure-key
 
 run:
-	sudo docker-compose run -d glytoucanstanza /run.sh
+	sudo docker.io run --restart="always" -p 9292:9292 -name="stanza_bluetree" aoki/stanza
+	#sudo docker-compose run -d glytoucanstanza /run.sh
 
 bash:
 	sudo docker.io run -it -v /opt/stanza:/stanza:rw -v /opt/stanza.git:/repo.git:rw -e "TRAC_PASS=glyT0uC@n" -e "TRAC_ARGS=--port 8000" aoki/stanza /bin/bash
