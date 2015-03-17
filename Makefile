@@ -8,7 +8,7 @@ runssh:
 	sudo docker.io run --rm -p 9292:9292 -name="stanza_bluetree" aoki/stanza /sbin/my_init --enable-insecure-key
 
 run:
-	sudo docker.io run --restart="always" -p 9292:9292 -name="stanza_bluetree" aoki/stanza
+	sudo docker.io run -d --restart="always" -p 9292:9292 -name="stanza_bluetree" aoki/stanza
 	#sudo docker-compose run -d glytoucanstanza /run.sh
 
 bash:
