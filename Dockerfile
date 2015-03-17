@@ -5,7 +5,7 @@ WORKDIR /app
 RUN git clone https://bitbucket.org/glycoSW/glytoucan-stanza.git
 
 WORKDIR /app/glytoucan-stanza
-RUN git pull && git checkout 25b09e4
+RUN git pull && git checkout f9ae434
 EXPOSE 9292
 ENV RACK_ENV production
 RUN ["/usr/bin/bundle", "install"]
