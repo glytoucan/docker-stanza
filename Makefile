@@ -1,5 +1,5 @@
 build:
-	sudo docker.io build -t aoki/stanza .
+	sudo docker.io build --no-cache -t aoki/stanza .
 
 install:
 
