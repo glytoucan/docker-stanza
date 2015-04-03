@@ -5,7 +5,9 @@ install:
 
 run:
 	sudo docker.io run -d --restart="always" --link glytoucan-apache:test.ts.glytoucan.org -p 9292:9292 --name="stanza_bluetree" aoki/stanza
-	#sudo docker-compose run -d glytoucanstanza /run.sh
+
+runtest:
+	sudo docker.io run -d --restart="always" -p 9292:9292 --name="stanza_bluetree" aoki/stanza
 
 bash:
 	sudo docker.io run -it -v /opt/stanza:/stanza:rw --link glytoucan_prod:test.ts.glytoucan.org aoki/stanza /bin/bash
