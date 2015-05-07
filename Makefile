@@ -1,16 +1,19 @@
 build:
-	sudo docker.io build --no-cache -t aoki/stanza .
+	sudo docker build --no-cache -t aoki/stanza .
 
 install:
 
 run:
-	sudo docker.io run -d --restart="always" --link glytoucan-apache:test.ts.glytoucan.org -p 9292:9292 --name="stanza_bluetree" aoki/stanza
+	sudo docker run -d --restart="always" --link glytoucan-apache:test.ts.glytoucan.org -p 9292:9292 --name="stanza_bluetree" aoki/stanza
+
+rundev:
+	sudo docker run -d --restart="always" -p 9292:9292 -v ~/workspace:/app --name="stanza_bluetree" aoki/stanza
 
 runtest:
-	sudo docker.io run -d --restart="always" -p 9292:9292 --name="stanza_bluetree" aoki/stanza
+	sudo docker run -d --restart="always" -p 9292:9292 -v /mnt/jenkins/workspace:/app --name="stanza_bluetree" aoki/stanza
 
 bash:
-	sudo docker.io run -it -v /opt/stanza:/stanza:rw --link glytoucan_prod:test.ts.glytoucan.org aoki/stanza /bin/bash
+	sudo docker run -it -v /opt/stanza:/stanza:rw --link glytoucan_prod:test.ts.glytoucan.org aoki/stanza /bin/bash
 
 #runtest:
 #	sudo docker run --rm -P --name stanza_bio_test aoki/stanza
@@ -34,29 +37,29 @@ setup:
 	sudo ./setup.sh
 
 ps:
-	sudo docker.io ps
+	sudo docker ps
 
 stop:
-	sudo docker.io stop stanza_bluetree
+	sudo docker stop stanza_bluetree
 
 logs:
-	sudo docker.io logs -f --tail=100 stanza_bluetree
+	sudo docker logs -f --tail=100 stanza_bluetree
 
 rm:
-	sudo docker.io rm stanza_bluetree
+	sudo docker rm stanza_bluetree
 
 ip:
-	sudo docker.io inspect -f "{{ .NetworkSettings.IPAddress }}" stanza_bluetree
+	sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" stanza_bluetree
 
 ssh:
 #	ssh -i /usr/local/share/baseimage-docker/insecure_key root@172.17.0.8
 	sudo docker-ssh stanza_bluetree
 
 restart:
-	sudo docker.io restart stanza_bluetree
+	sudo docker restart stanza_bluetree
 
 dump:
-	sudo docker.io export stanza_bluetree > stanza.glycoinfo.tar
+	sudo docker export stanza_bluetree > stanza.glycoinfo.tar
 
 load:
 	cat stanza.glycoinfo.tar.gz | docker import - aoki/docker-stanza:stanza_bluetree
