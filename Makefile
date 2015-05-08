@@ -1,16 +1,19 @@
 build:
+	sudo docker build -t aoki/stanza .
+
+buildnc:
 	sudo docker build --no-cache -t aoki/stanza .
 
 install:
 
 run:
-	sudo docker run -d --restart="always" --link glytoucan-apache:test.ts.glytoucan.org -p 9292:9292 --name="stanza_bluetree" aoki/stanza
+	sudo docker run -d --restart="always" --link glytoucan-apache:test.ts.glytoucan.org -p 9292:80 --name="stanza_bluetree" aoki/stanza
 
 rundev:
-	sudo docker run -d --restart="always" -p 9292:9292 -v ~/workspace:/app --name="stanza_bluetree" aoki/stanza
+	sudo docker run -d --restart="always" -p 9292:80 -v ~/workspace:/app --name="stanza_bluetree" aoki/stanza
 
 runtest:
-	sudo docker run -d --restart="always" -p 9292:9292 -v /mnt/jenkins/workspace:/app --name="stanza_bluetree" aoki/stanza
+	sudo docker run -d --restart="always" -p 9292:80 -v /mnt/jenkins/workspace:/app --name="stanza_bluetree" aoki/stanza
 
 bash:
 	sudo docker run -it -v /opt/stanza:/stanza:rw --link glytoucan_prod:test.ts.glytoucan.org aoki/stanza /bin/bash
