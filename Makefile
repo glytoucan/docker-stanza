@@ -7,13 +7,13 @@ buildnc:
 install:
 
 run:
-	sudo docker run -d --restart="always" --link glytoucan-apache:test.ts.glytoucan.org -p 9292:80 --name="stanza_bluetree" aoki/stanza
+	sudo docker run -d --restart="always" -link glytoucan-apache:test.ts.glytoucan.org -p 9292:80 --name="stanza_bluetree" aoki/stanza
 
 rundev:
 	sudo docker run -d --restart="always" -p 9292:80 -v ~/workspace:/app --name="stanza_bluetree" aoki/stanza
 
 runtest:
-	sudo docker run -d --restart="always" -p 9292:80 -link beta.glytoucan_bluetree:rdf.glytoucan.org -v /mnt/jenkins/workspace:/app --name="stanza_bluetree" aoki/stanza
+	sudo docker run -d --restart="always" -p 9292:80 -link beta.glytoucan:rdf.glytoucan.org -v /mnt/jenkins/workspace:/app --name="stanza_bluetree" aoki/stanza
 
 bash:
 	sudo docker run -it -v /opt/stanza:/stanza:rw -v ~/workspace:/app aoki/stanza /bin/bash
