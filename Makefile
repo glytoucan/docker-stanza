@@ -7,7 +7,7 @@ buildnc:
 install:
 
 run:
-	sudo docker run -d --restart="always" --link glytoucan-apache:test.ts.glytoucan.org -p 9292:80 --name="stanza_bluetree" aoki/stanza
+	sudo docker run -d --restart="always" -link glytoucan-apache:test.ts.glytoucan.org -p 9292:80 --name="stanza_bluetree" aoki/stanza
 
 rundev:
 	sudo docker run -d --restart="always" -p 9292:80 -v ~/workspace:/app --link apache-stanza.redirect:test.ts.glytoucan.org --name="stanza_bluetree" aoki/stanza 
@@ -17,10 +17,10 @@ runbeta:
 	sudo docker run -d --restart="always" -p 9292:80 --link apache-stanza.redirect:test.ts.glytoucan.org -v ~/workspace:/app --name="beta.stanza_bluetree" aoki/stanza 
 
 runtest:
-	sudo docker run -d --restart="always" -p 9292:80 -v /mnt/jenkins/workspace:/app --name="stanza_bluetree" aoki/stanza
+	sudo docker run -d --restart="always" -p 9292:80 -link beta.glytoucan:rdf.glytoucan.org -v /mnt/jenkins/workspace:/app --name="stanza_bluetree" aoki/stanza
 
 bash:
-	sudo docker run -it -v /opt/stanza:/stanza:rw --link glytoucan_prod:test.ts.glytoucan.org aoki/stanza /bin/bash
+	sudo docker run -it -v /opt/stanza:/stanza:rw -v ~/workspace:/app aoki/stanza /bin/bash
 
 #runtest:
 #	sudo docker run --rm -P --name stanza_bio_test aoki/stanza
@@ -69,6 +69,9 @@ ssh:
 
 restart:
 	sudo docker restart stanza_bluetree
+
+exec:
+	sudo docker exec -it stanza_bluetree /bin/bash
 
 dump:
 	sudo docker export stanza_bluetree > stanza.glycoinfo.tar
