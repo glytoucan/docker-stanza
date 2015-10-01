@@ -14,7 +14,7 @@ rundev:
 #--link rdf.glytoucan:rdf.glytoucan.org 
 
 runbeta:
-	sudo docker run -d --restart="always" --link apache-stanza.redirect:test.ts.glytoucan.org -v /mnt/jenkins/workspace:/app --name="beta.stanza_bluetree" aoki/stanza 
+	sudo docker run -d --restart="always" --link apache-stanza.redirect:test.ts.glytoucan.org --link apache-stanza.redirect:rdf.glytoucan.org -v /mnt/jenkins/workspace:/app --name="beta.stanza_bluetree" aoki/stanza 
 
 runtest:
 	sudo docker run -d --restart="always" -p 9292:80 -link beta.glytoucan:rdf.glytoucan.org -v /mnt/jenkins/workspace:/app --name="stanza_bluetree" aoki/stanza
