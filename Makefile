@@ -6,6 +6,9 @@ buildnc:
 
 install:
 
+runprod:
+	sudo docker run -d --restart="always" --link apache-stanza.redirect:test.ts.glytoucan.org --link apache-stanza.redirect:rdf.glytoucan.org -v /mnt/jenkins/workspace:/app --name="prod.stanza_bluetree" aoki/stanza 
+
 run:
 	sudo docker run -d --restart="always" -link glytoucan-apache:test.ts.glytoucan.org -p 9292:80 --name="stanza_bluetree" aoki/stanza
 
@@ -33,6 +36,10 @@ backup:
 
 clean: stop rm build run
 	echo "clean"
+
+cleanprod:
+	sudo docker stop prod.stanza_bluetree
+	sudo docker rm prod.stanza_bluetree
 
 cleanbeta:
 	sudo docker stop beta.stanza_bluetree
