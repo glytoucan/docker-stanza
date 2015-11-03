@@ -20,7 +20,7 @@ runbeta:
 	sudo docker run -d --restart="always" --link apache-stanza.redirect:test.ts.glytoucan.org --link apache-stanza.redirect:rdf.glytoucan.org -v /mnt/jenkins/workspace:/app --name="beta.stanza_bluetree" aoki/stanza 
 
 runtest:
-	sudo docker run -d --restart="always" -p 9292:80 -v /mnt/jenkins/workspace:/app --name="beta.stanza_bluetree" aoki/stanza
+	sudo docker run -d --restart="always" -p 9292:80 -v /mnt/jenkins/workspace:/app --name="stanza_bluetree" aoki/stanza
 
 bash:
 	sudo docker run -it -v /opt/stanza:/stanza:rw -v ~/workspace:/app aoki/stanza /bin/bash
