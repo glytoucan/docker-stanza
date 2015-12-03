@@ -63,10 +63,17 @@ stop:
 	sudo docker stop stanza_bluetree
 
 logs:
-	sudo docker logs -f --tail=100 stanza_bluetree
+	sudo docker logs -f --tail=1000 stanza_bluetree
 
 betalogs:
-	sudo docker logs -f --tail=100 beta.stanza_bluetree
+	sudo docker logs -f --tail=1000 beta.stanza_bluetree
+
+logsbeta:
+	sudo docker logs -f --tail=1000 beta.stanza_bluetree
+
+logsprod:
+	sudo docker logs -f --tail=1000 prod.stanza_bluetree
+
 rm:
 	sudo docker rm stanza_bluetree
 
