@@ -12,10 +12,6 @@ runprod:
 run:
 	sudo docker run -d --restart="always" -p 9292:80 -v $(HOME)/workspace:/app --link apache-stanza.redirect:rdf.glytoucan.org --link apache-stanza.redirect:test.ts.glytoucan.org --name="stanza_bluetree" aoki/stanza 
 
-rundev:
-	sudo docker run -d --restart="always" -p 9292:80 -v /home/aoki/workspace:/app --link apache-stanza.redirect:rdf.glytoucan.org --link apache-stanza.redirect:test.ts.glytoucan.org --name="beta.stanza_bluetree" aoki/stanza 
-#--link rdf.glytoucan:rdf.glytoucan.org 
-
 runbeta:
 	sudo docker run -d --restart="always" --link apache-stanza.redirect:rdf.glytoucan.org -v /mnt/jenkins/workspace:/app --name="beta.stanza_bluetree" aoki/stanza 
 # dont need this --link apache-stanza.redirect:test.ts.glytoucan.org
