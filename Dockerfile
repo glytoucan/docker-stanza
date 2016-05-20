@@ -1,8 +1,8 @@
 FROM google/ruby
 RUN apt-get update && apt-get install -y git
 
-#WORKDIR /app
-#RUN git clone https://bitbucket.org/glycoSW/glytoucan-stanza.git
+WORKDIR /app
+RUN git clone https://bitbucket.org/glycoSW/glytoucan-stanza.git
 
 WORKDIR /app/glytoucan-stanza
 
