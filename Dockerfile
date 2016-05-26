@@ -1,16 +1,31 @@
-FROM google/ruby
-RUN apt-get update && apt-get install -y git
+FROM ruby:2.2.0
 
-WORKDIR /app
+RUN apt-get update -qq && apt-get install -y build-essential
+
+# for postgres
+RUN apt-get install -y libpq-dev
+
+# for nokogiri
+RUN apt-get install -y libxml2-dev libxslt1-dev
+
+# for capybara-webkit
+RUN apt-get install -y libqt4-webkit libqt4-dev xvfb
+
+# for a JS runtime
+RUN apt-get install -y nodejs
+
+ENV APP_HOME /app
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+#ADD Gemfile* $APP_HOME/
 RUN git clone https://bitbucket.org/glycoSW/glytoucan-stanza.git
+WORKDIR $APP_HOME/glytoucan-stanza
 
-WORKDIR /app/glytoucan-stanza
+ENV BUNDLE_GEMFILE=$APP_HOME/glytoucan-stanza/Gemfile \
+  BUNDLE_JOBS=2 \
+  BUNDLE_PATH=/bundle
 
-EXPOSE 9292
-ENV RACK_ENV production
-RUN ["/usr/bin/bundle", "install"]
+RUN bundle install
 
-WORKDIR /
-ADD run.sh /run.sh
-RUN chmod a+x /run.sh
-CMD ["/run.sh"]
+ADD . $APP_HOME
