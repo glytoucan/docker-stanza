@@ -1,4 +1,4 @@
-glytoucanstanza:
+stanza:
   build: .
   command: run.sh
   ports:
