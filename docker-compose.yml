@@ -1,9 +1,14 @@
 glytoucanstanza:
   build: .
-  command: run.sh
+  command: bin/rails server --port 3000 --binding 0.0.0.0
   ports:
-   - "9292:9292"
+    - "9292:9292"
   external_links:
-   - docker-virtuoso_bluetree:ts.beta.glytoucan.org
-  name: stanza_bluetree
-   - docker-virtuoso_bluetree:ts.glytoucan.org
+    - docker-virtuoso_bluetree:ts.beta.glytoucan.org
+  volumes_from:
+    - bundle
+bundle:
+  image: debian
+  command: echo bundle path holder
+  volumes:
+    - /bundle
