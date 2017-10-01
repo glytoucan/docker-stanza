@@ -1,14 +1,22 @@
-stanza:
-  build: .
-  command: bin/rails server --port 3000 --binding 0.0.0.0
-  ports:
-    - "9292:9292"
-  external_links:
-    - docker-virtuoso_bluetree:ts.beta.glytoucan.org
-  volumes_from:
-    - bundle
-bundle:
-  image: debian
-  command: echo bundle path holder
-  volumes:
-    - /bundle
+version: '2'
+services:
+  stanza:
+    build: docker-stanza
+    command: /usr/local/bin/bundle exec rackup -p 80
+#    command: /usr/local/bundle/bin/bundle exec rake rails:update:bin -p 80
+#    image: glytoucan_stanza:v${GTC_VERSION}
+    ports:
+      - 9292:80
+    volumes: 
+    # the dockerfile uses /app/glytoucan-stanza so glytoucan-stanza should be in workspace
+      - ./glytoucan-stanza:/app/glytoucan-stanza
+      - /etc/localtime:/etc/localtime
+    working_dir: /app/glytoucan-stanza
+    restart: always
+#    volumes_from:
+#      - bundle
+#  bundle:
+#    image: debian
+#    command: echo bundle path holder
+#    volumes:
+#      - /bundle
